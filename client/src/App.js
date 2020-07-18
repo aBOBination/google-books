@@ -29,6 +29,7 @@ class App extends Component {
     API.getRecipes(this.state.recipeSearch)
       .then((res) => this.setState({ recipes: res.data }))
       .catch((err) => console.log(err));
+    console.log(this.state.recipes);
   };
 
   render() {
@@ -55,11 +56,11 @@ class App extends Component {
                   {this.state.recipes.map((recipe) => {
                     return (
                       <RecipeListItem
-                        key={recipe.title}
-                        title={recipe.title}
-                        href={recipe.href}
-                        ingredients={recipe.ingredients}
-                        thumbnail={recipe.thumbnail}
+                        key={recipe.id}
+                        title={recipe.volumeInfo.title}
+                        href={recipe.volumeInfo.infoLink}
+                        ingredients={recipe.volumeInfo.description}
+                        thumbnail={recipe.volumeInfo.imageLinks.smallThumbnail}
                       />
                     );
                   })}
