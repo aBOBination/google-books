@@ -1,23 +1,76 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Books from './pages/Books';
-import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
+import React, { Component } from 'react';
+import Jumbotron from './components/Jumbotron';
 import Nav from './components/Nav';
+import Input from './components/Input';
+import Button from './components/Button';
+import API from './utils/API';
+import { RecipeList, RecipeListItem } from './components/RecipeList';
+import { Container, Row, Col } from './components/Grid';
+import Search from './components/Search/Search';
 
-function App() {
-  return (
-    <Router>
+class App extends Component {
+  state = {
+    recipes: [],
+    recipeSearch: ''
+  };
+
+  handleInputChange = (event) => {
+    // Destructure the name and value properties off of event.target
+    // Update the appropriate state
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = (event) => {
+    // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+    event.preventDefault();
+    API.getRecipes(this.state.recipeSearch)
+      .then((res) => this.setState({ recipes: res.data }))
+      .catch((err) => console.log(err));
+  };
+
+  render() {
+    return (
       <div>
         <Nav />
-        <Switch>
-          <Route exact path="/" component={Books} />
-          <Route exact path="/books" component={Books} />
-          <Route component={NoMatch} />
-        </Switch>
+        <Jumbotron />
+        <Container>
+          <Row>
+            <Col size="md-12">
+              <Search
+                recipeSearch={this.state.recipeSearch}
+                handleInputChange={this.handleInputChange}
+                handleFormSubmit={this.handleFormSubmit}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col size="xs-12">
+              {!this.state.recipes.length ? (
+                <h1 className="text-center">No Recipes to Display</h1>
+              ) : (
+                <RecipeList>
+                  {this.state.recipes.map((recipe) => {
+                    return (
+                      <RecipeListItem
+                        key={recipe.title}
+                        title={recipe.title}
+                        href={recipe.href}
+                        ingredients={recipe.ingredients}
+                        thumbnail={recipe.thumbnail}
+                      />
+                    );
+                  })}
+                </RecipeList>
+              )}
+            </Col>
+          </Row>
+        </Container>
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
 export default App;
