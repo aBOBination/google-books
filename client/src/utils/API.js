@@ -2,9 +2,9 @@ import axios from 'axios';
 
 export default {
   // Gets all books
-  // getBooks: function () {
-  //   return axios.get('/api/books');
-  // },
+  getBooks: function () {
+    return axios.get('/api/books');
+  },
   // Gets the book with the given id
   getBook: function (id) {
     return axios.get('/api/books/' + id);
@@ -19,8 +19,8 @@ export default {
   },
   // Searchs Google API for books
   getBooks: function (query) {
-    return axios.get('/api/books', {
-      params: { q: query, key: 'AIzaSyCFGhFprwyPxE47MbhjXFFC_xeEAQ6kpUo' }
+    return axios.get('/api/search', {
+      params: { q: query }
     });
   }
 };
