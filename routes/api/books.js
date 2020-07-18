@@ -7,7 +7,8 @@ const booksController = require('../../controllers/booksController');
 //   .post(booksController.create);
 
 // Calls out to Google Books API and returns books matching query
-router.get('/recipes', (req, res) => {
+router.get('/books', (req, res) => {
+  console.log(req.params);
   axios
     .get('https://www.googleapis.com/books/v1/volumes?', {
       params: req.query
