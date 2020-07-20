@@ -7,8 +7,8 @@ import Search from '../components/Search/Search';
 
 class Books extends Component {
   state = {
-    recipes: [],
-    recipeSearch: ''
+    books: [],
+    bookSearch: ''
   };
 
   handleInputChange = (event) => {
@@ -20,10 +20,10 @@ class Books extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    API.getRecipes(this.state.recipeSearch)
-      .then((res) => this.setState({ recipes: res.data }))
+    API.getRecipes(this.state.bookSearch)
+      .then((res) => this.setState({ books: res.data }))
       .catch((err) => console.log(err));
-    console.log(this.state.recipes);
+    console.log(this.state.books);
   };
 
   render() {
@@ -34,7 +34,7 @@ class Books extends Component {
           <Row>
             <Col size="md-12">
               <Search
-                recipeSearch={this.state.recipeSearch}
+                bookSearch={this.state.bookSearch}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
               />
@@ -42,11 +42,11 @@ class Books extends Component {
           </Row>
           <Row>
             <Col size="xs-12">
-              {!this.state.recipes.length ? (
+              {!this.state.books.length ? (
                 <h1 className="text-center">No Recipes to Display</h1>
               ) : (
                 <RecipeList>
-                  {this.state.recipes.map((recipe) => {
+                  {this.state.books.map((recipe) => {
                     return (
                       <RecipeListItem
                         key={recipe.id}

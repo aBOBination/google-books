@@ -10,9 +10,9 @@ export default function Search(props) {
               <input
                 className="form-control"
                 type="text"
-                name="recipeSearch"
-                placeholder="Search For a Recipe"
-                value={props.recipeSearch}
+                name="bookSearch"
+                placeholder="Search For a Book"
+                value={props.bookSearch}
                 onChange={props.handleInputChange}></input>
             </div>
           </div>

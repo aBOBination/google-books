@@ -1,13 +1,55 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Col, Row, Container } from '../components/Grid';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
+import { RecipeList, RecipeListItem } from '../components/RecipeList';
+import { Container, Row, Col } from '../components/Grid';
+import Search from '../components/Search/Search';
 
-class Saved extends Component {
+class Books extends Component {
+  state = {
+    recipes: [],
+    recipeSearch: ''
+  };
+
+  componentDidMount() {
+    API.getSaved()
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ recipes: res.data });
+      })
+      .catch((err) => console.log(err));
+  }
+
   render() {
-    return <h1>Test</h1>;
+    return (
+      <div>
+        <Jumbotron />
+        <Container>
+          <Row>
+            <Col size="xs-12">
+              {!this.state.recipes.length ? (
+                <h1 className="text-center">No Recipes to Display</h1>
+              ) : (
+                <RecipeList>
+                  {this.state.recipes.map((recipe) => {
+                    return (
+                      <RecipeListItem
+                        key={recipe.id}
+                        title={recipe.volumeInfo.title}
+                        href={recipe.volumeInfo.infoLink}
+                        ingredients={recipe.volumeInfo.description}
+                        thumbnail={recipe.volumeInfo.imageLinks.smallThumbnail}
+                      />
+                    );
+                  })}
+                </RecipeList>
+              )}
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
   }
 }
 
-export default Saved;
+export default Books;
