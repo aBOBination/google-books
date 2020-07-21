@@ -14,7 +14,8 @@ export function RecipeListItem({
   thumbnail = 'https://placehold.it/300x300',
   title,
   ingredients,
-  href
+  href,
+  handleSave
 }) {
   return (
     <li className="list-group-item">
@@ -24,7 +25,7 @@ export function RecipeListItem({
             <Thumbnail src={thumbnail} />
           </Col>
           <Col size="xs-8 sm-9">
-            <h3>{title}</h3>
+            <h3 className="title">{title}</h3>
             <p>Ingredients: {ingredients}</p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to recipe!
@@ -34,15 +35,19 @@ export function RecipeListItem({
               target="_blank"
               href={href}
               type="success"
-              class="btn btn-info">
+              className="btn btn-info">
               View Info
             </a>
             <a
               rel="noreferrer noopener"
-              target="_blank"
-              href="/"
+              // target="_blank"
+              href="#"
+              // title={title}
+              // synopys={ingredients}
+              // link={href}
               type="button"
-              class="btn btn-info">
+              onClick={handleSave}
+              className="btn btn-info">
               Save
             </a>
           </Col>

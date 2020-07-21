@@ -20,10 +20,15 @@ class Books extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    API.getRecipes(this.state.bookSearch)
+    API.getBooks(this.state.bookSearch)
       .then((res) => this.setState({ books: res.data }))
       .catch((err) => console.log(err));
     console.log(this.state.books);
+  };
+
+  handleSave = ({ target }) => {
+    const parent = target.parentElement;
+    console.log(parent.getElementsByClassName('title').textContent);
   };
 
   render() {
@@ -54,6 +59,7 @@ class Books extends Component {
                         href={recipe.volumeInfo.infoLink}
                         ingredients={recipe.volumeInfo.description}
                         thumbnail={recipe.volumeInfo.imageLinks.smallThumbnail}
+                        handleSave={this.handleSave}
                       />
                     );
                   })}

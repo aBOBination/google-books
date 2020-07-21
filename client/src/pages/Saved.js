@@ -35,10 +35,10 @@ class Books extends Component {
                     return (
                       <RecipeListItem
                         key={recipe.id}
-                        title={recipe.volumeInfo.title}
-                        href={recipe.volumeInfo.infoLink}
-                        ingredients={recipe.volumeInfo.description}
-                        thumbnail={recipe.volumeInfo.imageLinks.smallThumbnail}
+                        title={recipe.title}
+                        // href={recipe.volumeInfo.infoLink}
+                        ingredients={recipe.synopsis}
+                        // thumbnail={recipe.volumeInfo.imageLinks.smallThumbnail}
                       />
                     );
                   })}
