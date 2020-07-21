@@ -29,6 +29,22 @@ export function RecipeListItem({
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to recipe!
             </a>
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href={href}
+              type="success"
+              class="btn btn-info">
+              View Info
+            </a>
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href="/"
+              type="button"
+              class="btn btn-info">
+              Save
+            </a>
           </Col>
         </Row>
       </Container>
