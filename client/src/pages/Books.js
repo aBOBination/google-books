@@ -28,7 +28,13 @@ class Books extends Component {
 
   handleSave = ({ target }) => {
     const parent = target.parentElement;
-    console.log(parent.getElementsByClassName('title').textContent);
+    console.log(parent);
+    const title = parent.getElementsByClassName('title')[0].innerHTML;
+    const synopsys = parent.getElementsByClassName('synopsys')[0].innerHTML;
+    const link = parent.getElementsByClassName('link')[0].innerHTML;
+    console.log(title);
+    console.log(synopsys);
+    console.log(link);
   };
 
   render() {

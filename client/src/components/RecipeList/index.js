@@ -26,7 +26,7 @@ export function RecipeListItem({
           </Col>
           <Col size="xs-8 sm-9">
             <h3 className="title">{title}</h3>
-            <p>Ingredients: {ingredients}</p>
+            <p className="synopsys">Ingredients: {ingredients}</p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to recipe!
             </a>
@@ -35,7 +35,7 @@ export function RecipeListItem({
               target="_blank"
               href={href}
               type="success"
-              className="btn btn-info">
+              className="btn btn-info link">
               View Info
             </a>
             <a
